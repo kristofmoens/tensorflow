@@ -1,5 +1,5 @@
 os: windows
-language: powershell
+language: shell
 env:
   global:
     - MSYS_NO_PATHCONV=1
