@@ -10,7 +10,6 @@ env:
     
     
 before_install:
-- choco install -y --no-progress bazel python3
 - |-
     case $TRAVIS_OS_NAME in
       windows)
@@ -48,8 +47,9 @@ cache:
     directories:
     - $HOME/AppData/Local/Temp/chocolatey
     - /C/tools/msys
+install:
+  - choco install -y --no-progress bazel pip
 script:
-  - choco install -y --no-progress pip
   - pip3 install six numpy wheel
   - pip3 install keras_applications==1.0.6 --no-deps
   - export PYTHON_BIN_PATH=$(which python3)
