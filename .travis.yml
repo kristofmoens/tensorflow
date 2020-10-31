@@ -13,19 +13,26 @@ before_install:
 - |-
     case $TRAVIS_OS_NAME in
       windows)
-        [[ ! -f C:/tools/msys64/msys2_shell.cmd ]] && rm -rf C:/tools/msys64
-        choco uninstall -y mingw
-        choco upgrade --no-progress -y msys2
-        export msys2='cmd //C RefreshEnv.cmd '
-        export msys2+='& set MSYS=winsymlinks:nativestrict '
-        export msys2+='& C:\\tools\\msys64\\msys2_shell.cmd -defterm -no-start'
-        export mingw64="$msys2 -mingw64 -full-path -here -c "\"\$@"\" --"
-        export msys2+=" -msys2 -c "\"\$@"\" --"
-        $msys2 pacman --sync --noconfirm --needed mingw-w64-x86_64-toolchain
+        #[[ ! -f C:/tools/msys64/msys2_shell.cmd ]] && rm -rf C:/tools/msys64
+        #choco uninstall -y mingw
+        #choco upgrade --no-progress -y msys2
+        #export msys2='cmd //C RefreshEnv.cmd '
+        #export msys2+='& set MSYS=winsymlinks:nativestrict '
+        #export msys2+='& C:\\tools\\msys64\\msys2_shell.cmd -defterm -no-start'
+        #echo "Starting updating of mingw"
+        #export mingw64="$msys2 -mingw64 -full-path -here -c "\"\$@"\" --"
+        #echo "Weird command now"
+        #export msys2+=" -msys2 -c "\"\$@"\" --"
+        #echo "sync pacman"
+        #$msys2 pacman --sync --noconfirm --needed mingw-w64-x86_64-toolchain
         ## Install more MSYS2 packages from https://packages.msys2.org/base here
-        taskkill //IM gpg-agent.exe //F  # https://travis-ci.community/t/4967
-        export PATH=/C/tools/msys64/mingw64/bin:$PATH
-        export MAKE=mingw32-make  # so that Autotools can find it
+        #taskkill //IM gpg-agent.exe //F  # https://travis-ci.community/t/4967
+        #export PATH=/C/tools/msys64/mingw64/bin:$PATH
+        #export MAKE=mingw32-make  # so that Autotools can find it
+        
+        choco install -y --no-progress bazel python3 pip
+        pip3 install six numpy wheel
+        pip3 install keras_applications==1.0.6 --no-deps
         ;;
     esac
 
@@ -44,9 +51,6 @@ cache:
     - $HOME/AppData/Local/Temp/chocolatey
     - /C/tools/msys
 script:
-  - choco install -y --no-progress bazel python3 pip
-  - pip3 install six numpy wheel
-  - pip3 install keras_applications==1.0.6 --no-deps
   - export PYTHON_BIN_PATH=$(which python3)
   - python ./configure.py
   - $mingw64 bazel build -c dbg --strip=never //tensorflow:libtensorflow.so 
