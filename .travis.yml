@@ -48,7 +48,7 @@ cache:
     - $HOME/AppData/Local/Temp/chocolatey
     - /C/tools/msys
 install:
-  - choco install -y --no-progress bazel
+  - choco install -y --no-progress bazel python3
 script:
   - python --version
   - pip3 install six numpy wheel
