@@ -31,9 +31,6 @@ before_install:
         #export PATH=/C/tools/msys64/mingw64/bin:$PATH
         #export MAKE=mingw32-make  # so that Autotools can find it
         
-        choco install -y --no-progress pip
-        pip3 install six numpy wheel
-        pip3 install keras_applications==1.0.6 --no-deps
         ;;
     esac
 
@@ -52,6 +49,9 @@ cache:
     - $HOME/AppData/Local/Temp/chocolatey
     - /C/tools/msys
 script:
+  - choco install -y --no-progress pip
+  - pip3 install six numpy wheel
+  - pip3 install keras_applications==1.0.6 --no-deps
   - export PYTHON_BIN_PATH=$(which python3)
   - python ./configure.py
   - $mingw64 bazel build -c dbg --strip=never //tensorflow:libtensorflow.so 
