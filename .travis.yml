@@ -10,6 +10,7 @@ env:
     
     
 before_install:
+- choco install -y --no-progress bazel python3
 - |-
     case $TRAVIS_OS_NAME in
       windows)
@@ -30,7 +31,7 @@ before_install:
         #export PATH=/C/tools/msys64/mingw64/bin:$PATH
         #export MAKE=mingw32-make  # so that Autotools can find it
         
-        choco install -y --no-progress bazel python3 pip
+        choco install -y --no-progress pip
         pip3 install six numpy wheel
         pip3 install keras_applications==1.0.6 --no-deps
         ;;
