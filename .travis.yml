@@ -67,7 +67,7 @@ install:
   - choco install -y --no-progress bazel
   - pip3 install six numpy wheel
   - pip3 install keras_applications==1.0.6 --no-deps
-  - cmd /c "git clone https://github.com/microsoft/vcpkg; dir; .\vcpkg\bootstrap-vcpkg.bat; .\vcpkg\vcpkg install ms-stl"
+  - git clone https://github.com/microsoft/vcpkg && dls -alrt && pwd && .\vcpkg\bootstrap-vcpkg.bat && .\vcpkg\vcpkg install ms-stl
 script:
   - $msys2 cat "C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\INCLUDE\iosfwd"
   - $msys2 ls "C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\INCLUDE\"
