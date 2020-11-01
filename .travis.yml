@@ -49,7 +49,7 @@ cache:
     - /C/tools/msys
 install:
   - choco install -y --no-progress bazel python3
-  - choco install -y --no-progress pip3
+  - choco install -y --no-progress pip
 script:
   - python --version
   - pip3 install six numpy wheel
