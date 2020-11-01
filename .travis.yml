@@ -68,6 +68,7 @@ install:
   - pip3 install six numpy wheel
   - pip3 install keras_applications==1.0.6 --no-deps
 script:
-  - more C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\INCLUDE\iosfwd
+  - $msys2 cat "C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\INCLUDE\iosfwd"
+  - $msys2 ls "C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\INCLUDE\"
   - python ./configure.py
   - bazel build --config=monolithic --config=v2 -c dbg --strip=never //tensorflow:libtensorflow.so 
