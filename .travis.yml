@@ -68,8 +68,8 @@ install:
   - pip3 install six numpy wheel
   - pip3 install keras_applications==1.0.6 --no-deps
   - git clone https://github.com/microsoft/vcpkg
-  - .\vcpkg\bootstrap-vcpkg.bat
   - dir
+  - .\vcpkg\bootstrap-vcpkg.bat
   - .\vcpkg\vcpkg install ms-stl
 script:
   - $msys2 cat "C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\INCLUDE\iosfwd"
