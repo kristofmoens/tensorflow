@@ -65,8 +65,8 @@ jobs:
       
 install:
   - choco install -y --no-progress bazel
-script:
   - pip3 install six numpy wheel
   - pip3 install keras_applications==1.0.6 --no-deps
+script:
   - python ./configure.py
-  - $mingw64 bazel build -c dbg --strip=never //tensorflow:libtensorflow.so 
+  - bazel build -c dbg --strip=never //tensorflow:libtensorflow.so 
